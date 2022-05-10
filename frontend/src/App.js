@@ -10,7 +10,7 @@ function App() {
 
     (async () => {
       const response = await service.getAllTodos();
-
+      console.info(response)
       const data = response.data;
 
       setTodo(data);
@@ -48,9 +48,9 @@ function App() {
       }
 
       return (
-        <div key={index} style={{ backgroundColor : temperatureToColor(todo.temperatureC) }}>
-          <h3>{todo.summary}</h3>
-          <p>{todo.temperatureC}</p>
+        <div key={index} style={{ backgroundColor : temperatureToColor(todo.TempValue) }}>
+          <h3>{todo.Name}</h3>
+          <p>{todo.TempValue}</p>
         </div>
       );
     });
@@ -58,7 +58,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Todo Lists</h1>
+      <h1>Todo Listsss</h1>
       {renderTodo()}
     </div>
   );

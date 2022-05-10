@@ -2,6 +2,7 @@ version: '3'
 
 services:
   dotnet-core:
+    container_name: dotnet-backend
     image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
       - ./TodoApi:/app

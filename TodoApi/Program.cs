@@ -1,4 +1,5 @@
 using TodoApi.Models;
+using TodoApi.Services;
 
 var  MyAllowSpecificOrigins = "AllowAll";
 
@@ -23,7 +24,11 @@ builder.Services.AddCors(option => {
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<TimeService>();
 
+builder.Services.AddControllers()
+    .AddJsonOptions(options => 
+        options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
 var app = builder.Build();
 
@@ -42,6 +47,7 @@ var summaries = new[]
     "Congelante", "Reforzante", "Frío", "Frío", "Suave", "Cálido", "Bálsamo", "Caliente", "Sofocante", "Abrazador"
 };
 
+
 app.MapGet("/", () =>
 {
     var forecast =  Enumerable.Range(1, 100).Select(index =>
@@ -49,6 +55,12 @@ app.MapGet("/", () =>
         var temperature = Random.Shared.Next(-20, 55);
         var tempToZero = (temperature + 20) / 10;
 
+        var time = new Time
+        {
+            Id = Guid.NewGuid().ToString(),
+            TimeName = summaries[tempToZero],
+            TempValue = temperature
+        };
 
         return new WeatherForecast(
             DateTime.Now.AddDays(index),
@@ -60,6 +72,8 @@ app.MapGet("/", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.MapControllers();
 
 app.Run();
 

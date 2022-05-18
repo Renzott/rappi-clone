@@ -1,6 +1,5 @@
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Backend.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -13,8 +12,7 @@ builder.Services.AddCors(option =>
     {
         p.WithOrigins("*")
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
+            .AllowAnyHeader();
     });
 });
 
@@ -25,22 +23,17 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-.AddCookie( options =>
-{
-    options.LoginPath = "/login";
+builder.Services.AddAuthentication(options =>
+ {
+     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+ }).AddJwtBearer(o =>{
+    var clientId = configuration["Authentication:Google:ClientId"];
 
-    options.Events.OnRedirectToLogin = context =>
-    {
-        context.Response.StatusCode = 401;
-        return Task.CompletedTask;
-    };
-})
-    .AddGoogle(options =>
-    {
-        options.ClientId = configuration["Authentication:Google:ClientId"];
-        options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-    });
+    o.SecurityTokenValidators.Clear();
+    o.SecurityTokenValidators.Add(new GoogleTokenValidator(clientId));
+});
 
 var app = builder.Build();
 
@@ -52,16 +45,21 @@ if (app.Environment.IsDevelopment())
 }
 
 /* app.UseHttpsRedirection(); */
+
 app.MapControllers();
 app.UseStatusCodePages();
 
-app.UseCookiePolicy( new CookiePolicyOptions
+app.UseCookiePolicy(new CookiePolicyOptions
 {
     MinimumSameSitePolicy = SameSiteMode.None,
-    Secure = CookieSecurePolicy.Always
+    Secure = CookieSecurePolicy.SameAsRequest,
 });
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.Run();
 
 app.Run();

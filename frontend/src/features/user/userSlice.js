@@ -4,7 +4,8 @@ import { fetchUser } from "./userService";
 
 export const pullUser = createAsyncThunk("users/fetchUser", async (_,thunkAPI) => {
     try {
-        throw new Error("Error");
+        const response = await axios.get("https://reqres.in/api/users/2");
+        return response.data;
     } catch (e) {
         console.log(thunkAPI)
         const message = (e.response && e.response.data && e.response.data.message) || "Something went wrong";

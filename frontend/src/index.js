@@ -17,6 +17,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/producs' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </GSIProvider>

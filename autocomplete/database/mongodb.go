@@ -1,4 +1,4 @@
-package database
+/* package database
 
 import (
 	"context"
@@ -7,22 +7,22 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-)
+) */
 
-var (
-	/* 	usr = "root"
-	   	pwd = "root" */
-	host     = "localhost"
+/* var ( */
+/* 	usr = "root"
+   	pwd = "root" */
+/* host     = "localhost"
 	port     = "27017"
 	database = "sample_mflix"
-)
+) */
+/*
+func GetCollection(collection string) *mongo.Collection { */
 
-func GetCollection(collection string) *mongo.Collection {
+/* 	uri := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s", usr, pwd, host, port, database)
+ */
 
-	/* 	uri := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s", usr, pwd, host, port, database)
-	 */
-
-	uri := fmt.Sprintf("mongodb://%s:%s/%s", host, port, database)
+/* uri := fmt.Sprintf("mongodb://%s:%s/%s", host, port, database)
 
 	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
 
@@ -41,4 +41,6 @@ func GetCollection(collection string) *mongo.Collection {
 	}
 
 	return client.Database(database).Collection(collection)
-}
+}*/
+
+package database

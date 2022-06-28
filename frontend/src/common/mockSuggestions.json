@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "name": "Pollo"
+    },
+    {
+        "id": "2",
+        "name": "Carne"
+    },
+    {
+        "id": "3",
+        "name": "Pescado"
+    },
+    {
+        "id": "4",
+        "name": "Verduras"
+    },
+    {
+        "id": "5",
+        "name": "Frutas"
+    },
+    {
+        "id": "6",
+        "name": "Pizza"
+    },
+    {
+        "id": "7",
+        "name": "Pasta"
+    },
+    {
+        "id": "8",
+        "name": "Ensalada"
+    },
+    {
+        "id": "9",
+        "name": "Hamburguesa"
+    },
+    {
+        "id": "10",
+        "name": "Bebidas"
+    },
+    {
+        "id": "11",
+        "name": "Postres"
+    },
+    {
+        "id": "12",
+        "name": "Cervezas"
+    },
+    {
+        "id": "13",
+        "name": "Café"
+    },
+    {
+        "id": "14",
+        "name": "Café con leche"
+    },
+    {
+        "id": "15",
+        "name": "Medicinas"
+    }
+]

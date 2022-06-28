@@ -1,0 +1,14 @@
+@import "src/styles/global.scss";
+
+.footer{
+    padding: 1rem 0;
+    background-color: $secondaryBackground-color;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 300;
+}

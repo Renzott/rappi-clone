@@ -26,21 +26,16 @@ public class GoogleTokenValidator : ISecurityTokenValidator
     {
         return true;
     }
-
+    // Validacion de token de google
     public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
     {
         validatedToken = _tokenHandler.ReadJwtToken(securityToken);
-        Console.WriteLine(_googleClientId);
         try
         {
-            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, new GoogleJsonWebSignature.ValidationSettings(){
+            var payload = GoogleJsonWebSignature.ValidateAsync(securityToken, new GoogleJsonWebSignature.ValidationSettings()
+            {
                 Audience = new[] { _googleClientId }
             }).Result;
-
-            Console.WriteLine("Name" + payload.Picture);
-            Console.WriteLine("Email" + payload.Email);
-            Console.WriteLine("Subject" + payload.Subject);
-            Console.WriteLine("Issuer" + payload.Issuer);
 
             var claims = new List<Claim>()
         {
@@ -50,14 +45,22 @@ public class GoogleTokenValidator : ISecurityTokenValidator
             new Claim(JwtRegisteredClaimNames.Sub, payload.Subject),
             new Claim(JwtRegisteredClaimNames.Iss, payload.Issuer),
         };
-
             var principle = new ClaimsPrincipal();
             principle.AddIdentity(new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme));
             return principle;
         }
         catch (Exception e)
-        {
-            Console.WriteLine(e);
+        {   
+            if (e is AggregateException)
+            {
+                var ex = e as AggregateException;
+
+                if (ex?.InnerException is InvalidJwtException)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                    throw new SecurityTokenValidationException("Invalid token", e);
+                }
+            }
             throw;
         }
     }

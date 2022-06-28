@@ -1,12 +1,74 @@
+@import "src/styles/global.scss";
 
-//sticky navbar
 .navbar{   
     display: flex;
     justify-content: space-between;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
     align-items: center;
     padding: 0.5rem 1rem;
-    background-color: #fff;
+    background-color: $primary-color;
     border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+// hover mouse change icon
+.logo{
+    color: $text-color;
+    cursor: pointer;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    .menuShopping{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        color: $text-color;
+        background-color:  $secondaryBackground-color;
+        width: 50px;
+        height: 30px;
+        cursor: pointer;
+
+        i{
+            padding-left: 5px;
+            padding-right: 5px;
+            font-size: 15px;
+        }
+
+    }
+
+    .menuButton{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80px;
+        height: 30px;
+        border: none;
+        background-color: $button-color;
+        cursor: pointer;
+
+        color: $text-color;
+    }
+
+    //circular div with icon
+    .divCircle{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $button-color;
+        cursor: pointer;
+    }
 }

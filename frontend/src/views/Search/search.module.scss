@@ -1,0 +1,111 @@
+.container{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: .5rem;
+
+    @media screen and (max-width: 510px){
+        grid-template-columns: 1fr;
+        
+    }
+
+    
+
+    .dashboard{
+        border: 1px solid #eaeaea;
+    }
+
+    .infoContainer{
+        border: 1px solid #eaeaea;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 1rem;
+        margin: 0 10px 0 10px;
+        
+
+        @media screen and (max-width: 920px){
+            grid-template-columns: 1fr 1fr 1fr;
+            
+        }
+
+        @media screen and (max-width: 780px){
+            grid-template-columns: 1fr 1fr;
+            
+        }
+
+        @media screen and (max-width: 310px){
+            grid-template-columns: 1fr;
+            
+        }
+        
+        .item{
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+
+            // image center vertical and horizontal
+            .imageContainer{
+                border: 1px solid #eaeaea;
+                width: auto;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+
+                //container botton left circle
+                .addCartContainer{
+                    width: 40px;
+                    height: 40px;
+                    background-color: gray;
+                    border-radius: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    right: 0px;
+                    bottom: 0px;
+
+                    i{
+                        font-size: 1.2rem;
+                    }
+                }
+
+                img{
+                    width: auto;
+                    height: 140px;
+                    @media screen and (max-width: 510px){
+                        height: 100px;
+                        
+                    }
+                }
+            }
+
+            .info{
+                border: 1px solid #eaeaea;
+                width: auto;
+                height: auto;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: .5rem;
+                margin: 10px;
+
+                // text center vertical
+                .title{
+                    border: 1px solid #eaeaea;
+                    width: auto;
+                    height: auto;
+                }
+
+                .description{
+                    border: 1px solid #eaeaea;
+                    width: auto;
+                    height: auto;
+                }
+            }
+        }
+    }
+}

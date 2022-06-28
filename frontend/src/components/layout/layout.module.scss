@@ -1,0 +1,20 @@
+// grid system nabvar and container
+.container{
+   display: grid;
+    grid-template-areas: "navbar"
+                         "container"
+                         "footer";
+}
+
+.containerNavbar{
+    grid-area: navbar;
+}
+
+.containerChildren{
+    grid-area: container;
+    margin-top: 67px;
+}
+
+.containerFooter{
+    grid-area: footer;
+}

@@ -1,10 +1,16 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Backend.Security;
+using Backend.Models;
+using Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 var MyAllowSpecificOrigins = "AllowAll";
+
+builder.Services.Configure<DatabaseSettings>(
+    configuration.GetSection("DatabaseSettings"));
+
 
 builder.Services.AddCors(option =>
 {
@@ -18,6 +24,10 @@ builder.Services.AddCors(option =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<ProductService>();
+builder.Services.AddSingleton<OrderService>();
+builder.Services.AddSingleton<CategoryService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -59,7 +69,5 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.Run();
 
 app.Run();
